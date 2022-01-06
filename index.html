@@ -1,1 +1,119 @@
-hello
+<html>
+    <head>
+        <title>YusufYaser's website</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+        <style>
+            body {
+                background-color: #0f0f0f;
+                font-family: 'Roboto';
+                font-size: 20px;
+                color: white;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            .menuitem {
+                cursor: pointer;
+                padding: 5px;
+            }
+
+			.menuitem:hover {
+				text-decoration: underline;
+			}
+
+            .project_img {
+                height: 150px;
+                width: 150px;
+                border-radius: 100px;
+            }
+        </style>
+
+        <script>
+            function p(page) {
+                var elements = document.getElementsByTagName("div");
+                for (i = 0; i < elements.length; i++) {
+                    if (elements[i].id.match(/p_.*/g)) {
+                        elements[i].style.display = 'none';
+                    }
+                }
+                var p = document.getElementById("p_" + page);
+                p.style.opacity = 0;
+                p.style.display = 'block';
+                var int;
+                var o = 0.0;
+                var b = 100;
+                int = setInterval(() => {
+                    if (p.style.opacity == 1) {
+                        clearInterval(int);
+                        return;
+                    }
+                    o += 0.1;
+                    b -= 10;
+                    p.style.opacity = o;
+                    p.style.paddingTop = b;
+                }, 20);
+            }
+
+            function tooltip(text) {
+                var e = document.getElementById("tooltip");
+                e.innerHTML = text;
+                e.style.opacity = 0;
+                e.style.display = 'block';
+                var o = 0.0;
+                int = setInterval(() => {
+                    if (e.style.opacity == 1) {
+                        clearInterval(int);
+                        return;
+                    }
+                    o += 0.1;
+                    e.style.opacity = o;
+                }, 15);
+            }
+
+            function htooltip() {
+                document.getElementById("tooltip").style.display = 'none';
+            }
+
+            function l(t) {
+                location.assign(t);
+            }
+
+            setTimeout(() => {
+                p("projects");
+            }, 250);
+        </script>
+    </head>
+
+    <body>
+        <center>
+            <div style="font-size: 20px; padding: 15px;">
+                <snap class="menuitem" onclick="p('home')">Home</snap>
+                <snap class="menuitem" onclick="p('projects')">Projects</snap>
+            </div>
+        </center>
+        
+        <div id="p_home" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
+            <strong><snap style="font-size: 35px;">Hello, I'm <snap style="color: red">YusufYaser</snap></snap></strong>
+            </br>
+            Backend Developer
+        </div>
+
+        <div id="p_projects" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
+            <strong><snap style="font-size: 35px;"><center>These are my <snap style="color: red">projects</snap></center></snap></strong>
+            </br></br>
+            <center>
+                <img src="VitezaCloud.png" alt="VitezaCloud" class="project_img" onclick="l('https://viteza.cloud')" onmouseover="tooltip('VitezaCloud')" onmouseout="htooltip()">
+                <img src="Blank.png" class="project_img" onmouseover="tooltip('Soon')" onmouseout="htooltip()">
+            </center>
+        </div>
+
+        <div id="tooltip" style="position: absolute; bottom: 0; margin: 10px; padding: 10px; border-radius: 15px; background-color: #1c1c1c; display: none;">
+            Tooltip text
+        </duv>
+    </body>
+</html>
