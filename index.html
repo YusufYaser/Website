@@ -86,6 +86,44 @@
             }
 
             particlesJS.load('particles-js','particle-cfg.json');
+            
+            var hidden = false;
+            document.addEventListener('keydown', function(event) {
+                if (event.ctrlKey && event.key == 'x') {
+                    if (hidden) {
+                        var n = document.getElementById("navbar");
+                        var int;
+                        var o = 0.0;
+                        n.style.opacity = o;
+                        n.style.display = 'block';
+                        document.body.style.cursor = '';
+                        int = setInterval(() => {
+                            if (n.style.opacity == 1) {
+                                clearInterval(int);
+                                return;
+                            }
+                            o += 0.1;
+                            n.style.opacity = o;
+                        }, 20);
+                    } else {
+                        var n = document.getElementById("navbar");
+                        var int;
+                        var o = 1.0;
+                        n.style.opacity = o;
+                        int = setInterval(() => {
+                            if (n.style.opacity <= 0) {
+                                n.style.display = 'none';
+                                document.body.style.cursor = 'none';
+                                clearInterval(int);
+                                return;
+                            }
+                            o -= 0.1;
+                            n.style.opacity = o;
+                        }, 20);
+                    }
+                    hidden = !hidden;
+                }
+            });
 
             setTimeout(() => {
                 p("home");
@@ -94,15 +132,12 @@
     </head>
 
     <body id="particles-js">
-        <div style="font-size: 30px; padding: 15px; float: left;">
-            <strong><snap style="color: red">YusufYaser</snap></strong>
-        </div>
-        <div style="font-size: 20px; padding: 15px; float: right;">
+        <center><div id="navbar" style="font-size: 20px; padding: 15px; float: center;">
             <snap class="menuitem" onclick="p('home')">Home</snap>
             <snap class="menuitem" onclick="p('projects')">Projects</snap>
             <snap class="menuitem" onclick="p('donate')">Donate</snap>
             <snap class="menuitem" onclick="p('about')">About me</snap>
-        </div>
+        </div></center>
         
         <div id="p_home" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
             <strong><snap style="font-size: 35px;">Hello, I'm <snap style="color: red">Yusuf</snap></snap></strong>
