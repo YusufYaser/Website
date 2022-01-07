@@ -3,6 +3,7 @@
         <title>YusufYaser's website</title>
         <meta name="viewport" content="width=device-width,initial-scale=1"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+        <script src="particles.min.js"></script>
         <style>
             body {
                 background-color: #0f0f0f;
@@ -15,6 +16,7 @@
                 -moz-user-select: none;
                 -ms-user-select: none;
                 user-select: none;
+                overflow: hidden;
             }
 
             .menuitem {
@@ -83,20 +85,24 @@
                 location.assign(t);
             }
 
+            particlesJS.load('particles-js','particle-cfg.json');
+
             setTimeout(() => {
                 p("home");
             }, 250);
         </script>
     </head>
 
-    <body>
-        <center>
-            <div style="font-size: 20px; padding: 15px;">
-                <snap class="menuitem" onclick="p('home')">Home</snap>
-                <snap class="menuitem" onclick="p('projects')">Projects</snap>
-                <snap class="menuitem" onclick="l('https://ko-fi.com/yusufyaser')">Donate</snap>
-            </div>
-        </center>
+    <body id="particles-js">
+        <div style="font-size: 30px; padding: 15px; float: left;">
+            <strong><snap style="color: red">YusufYaser</snap></strong>
+        </div>
+        <div style="font-size: 20px; padding: 15px; float: right;">
+            <snap class="menuitem" onclick="p('home')">Home</snap>
+            <snap class="menuitem" onclick="p('projects')">Projects</snap>
+            <snap class="menuitem" onclick="p('donate')">Donate</snap>
+            <snap class="menuitem" onclick="p('about')">About me</snap>
+        </div>
         
         <div id="p_home" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
             <strong><snap style="font-size: 35px;">Hello, I'm <snap style="color: red">YusufYaser</snap></snap></strong>
@@ -113,8 +119,22 @@
             </center>
         </div>
 
+        <div id="p_donate" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
+            <strong><snap style="font-size: 35px;"><center>You can <snap style="color: red">donate</snap> to me on <snap style="color: blue; text-decoration: underline;" onclick="l('https://ko-fi.com/yusufyaser')" onmouseover="tooltip('https://ko-fi.com/yusufyaser')" onmouseout="htooltip()">here</snap></center></snap></strong>
+        </div>
+
+        <div id="p_about" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
+            <strong><snap style="font-size: 35px;"><center>About <snap style="color: red">me</snap></center></snap></strong>
+            </br></br>
+            Hello! I am <snap style="color: red">YusufYaser</snap>. I'm a <snap style="color: red">backend developer</snap> and starting to learn frontend.
+            I like helping people with their problems. I also like playing some games like <snap style="color: red">Minecraft</snap> and <snap style="color: red">GTA 5</snap>.</br>
+            I'm also an <snap style="color: red">intermediate</snap> at cyber security and looking forward to learn more about it.</br></br>
+            
+            That is it for now I guess..
+        </div>
+
         <div id="tooltip" style="position: absolute; bottom: 0; margin: 10px; padding: 10px; border-radius: 15px; background-color: #1c1c1c; display: none;">
             Tooltip text
-        </duv>
+        </div>
     </body>
 </html>
