@@ -40,6 +40,9 @@
         </style>
 
         <script>
+            var MouseX = 0;
+            var MouseY = 0;
+
             function p(page) {
                 var elements = document.getElementsByTagName("div");
                 for (i = 0; i < elements.length; i++) {
@@ -69,7 +72,9 @@
                 var e = document.getElementById("tooltip");
                 e.innerHTML = text;
                 e.style.opacity = 0;
-                //e.style.display = 'block';
+                e.style.display = 'block';
+                e.style.left = MouseX;
+                e.style.top = MouseY + 25;
                 var o = 0.0;
                 int = setInterval(() => {
                     if (e.style.opacity == 1) {
@@ -129,6 +134,15 @@
                 }
             });
 
+            document.addEventListener('contextmenu', function(event) {
+                return false;
+            });
+
+            document.addEventListener('mousemove', function(event) {
+                MouseX = event.pageX;
+                MouseY = event.pageY;
+            });
+
             setTimeout(() => {
                 p("home");
             }, 250);
@@ -138,8 +152,8 @@
     <body id="particles-js">
         <center><div id="navbar" style="font-size: 20px; padding: 15px; float: center;">
             <snap class="menuitem" onclick="p('home')">Home</snap>
-            <snap class="menuitem" onclick="p('projects')">Projects</snap>
             <snap class="menuitem" onclick="p('donate')">Donate</snap>
+            <snap class="menuitem" onclick="p('contact')">Contact me</snap>
             <snap class="menuitem" onclick="p('about')">About me</snap>
         </div></center>
         
@@ -149,17 +163,21 @@
             Backend Developer
         </div>
 
-        <div id="p_projects" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
-            <strong><snap style="font-size: 35px;"><center>These are my <snap style="color: red">projects</snap></center></snap></strong>
-            </br></br>
-            <center>
-                <img src="VitezaCloud.png" alt="VitezaCloud" class="project_img" onclick="l('https://viteza.cloud')" onmouseover="tooltip('VitezaCloud')" onmouseout="htooltip()">
-                <img src="Blank.png" class="project_img" onmouseover="tooltip('Soon')" onmouseout="htooltip()">
-            </center>
+        <div id="p_donate" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
+            <strong><snap style="font-size: 35px;"><center>You can <snap style="color: red">donate</snap> to me on <snap style="color: blue; text-decoration: underline;" onclick="l('https://ko-fi.com/yusufyaser')" onmouseover="tooltip('https://ko-fi.com/yusufyaser')" onmouseout="htooltip()">here</snap></center></snap></strong></br></br>
+            <!--<strong><snap style="font-size: 25px;">This is not necessarily donating, but you can use these <snap style="color: red">referral codes</snap>:</snap></strong></br><snap style="font-size: 10px;">(ok more like this referral code only but yeah)</snap>
+            
+            if you see this, yeah that is not here yet
+        -->
         </div>
 
-        <div id="p_donate" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
-            <strong><snap style="font-size: 35px;"><center>You can <snap style="color: red">donate</snap> to me on <snap style="color: blue; text-decoration: underline;" onclick="l('https://ko-fi.com/yusufyaser')" onmouseover="tooltip('https://ko-fi.com/yusufyaser')" onmouseout="htooltip()">here</snap></center></snap></strong>
+        <div id="p_contact" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
+            <strong><snap style="font-size: 35px;">You can contact me through:</snap></strong>
+            </br></br>
+            <center>
+                <img style="width: 50px; height: 50px;" onmouseover="tooltip('YusufYaser&#35;7242')" onmouseout="htooltip()" src="Discord.png"></img>
+                <img style="width: 65px; height: 50px;" onmouseover="tooltip('@RealYusufYaser')" onmouseout="htooltip()" src="Twitter.png"></img>
+            </center>
         </div>
 
         <div id="p_about" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
@@ -172,7 +190,7 @@
             That is it for now I guess..
         </div>
 
-        <div id="tooltip" style="position: absolute; bottom: 0; margin: 10px; padding: 10px; border-radius: 15px; background-color: #1c1c1c; display: none;">
+        <div id="tooltip" style="position: absolute; padding: 10px; border-radius: 15px; background-color: #1c1c1c; display: none;">
             Tooltip text
         </div>
     </body>
