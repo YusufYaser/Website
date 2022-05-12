@@ -1,12 +1,9 @@
 <html>
     <head>
-        <title>YusufYaser's website</title>
+        <title>YusufYaser's Personal Website</title>
         <meta name="viewport" content="width=device-width,initial-scale=1"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
         <script src="particles.min.js"></script>
-	    <script async src="https://arc.io/widget.min.js#sH6oHUB4"></script>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9343036580896143"
-            crossorigin="anonymous"></script>
         
         <style>
             body {
@@ -37,12 +34,47 @@
                 width: 150px;
                 border-radius: 100px;
             }
+
+            .line {
+                background-color: #fff;
+                padding-right: 4px;
+                margin: 5px;
+                height: 2px;
+                width: 20px;
+            }
+
+            .moreitems {
+                width: fit-content;
+                border: solid rgb(128, 128, 128);
+                background-color: rgb(128, 128, 128, 0.2);
+                border-radius: 15px;
+                padding: 5px;
+                display: none;
+            }
+
+            #navbar {
+                font-size: 20px;
+                padding: 15px;
+                float: center;
+            }
+            
+            #tooltip {
+                position: absolute;
+                padding: 10px;
+                border-radius: 15px;
+                background-color: #1c1c1c;
+                display: none;
+            }
+
+            @media only screen and (max-width: 420px) {
+                .menuitem {
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+            }
         </style>
 
         <script>
-            var MouseX = 0;
-            var MouseY = 0;
-
             function p(page) {
                 var elements = document.getElementsByTagName("div");
                 for (i = 0; i < elements.length; i++) {
@@ -73,8 +105,6 @@
                 e.innerHTML = text;
                 e.style.opacity = 0;
                 e.style.display = 'block';
-                e.style.left = MouseX;
-                e.style.top = MouseY + 25;
                 var o = 0.0;
                 int = setInterval(() => {
                     if (e.style.opacity == 1) {
@@ -134,23 +164,36 @@
                 }
             });
 
-            document.addEventListener('contextmenu', function(event) {
+            window.oncontextmenu = function() {
                 return false;
-            });
+            }
 
             document.addEventListener('mousemove', function(event) {
-                MouseX = event.pageX;
-                MouseY = event.pageY;
+                var e = document.getElementById("tooltip");
+                e.style.left = event.pageX;
+                e.style.top = event.pageY + 25;
             });
 
             setTimeout(() => {
                 p("home");
             }, 250);
+
+            // soon:tm:
+            function expandmenu() {
+                var e = document.getElementById("navbar");
+                e.style.display == "none" ? e.style.display = "block" : e.style.display == "none";
+            }
         </script>
     </head>
 
     <body id="particles-js">
-        <center><div id="navbar" style="font-size: 20px; padding: 15px; float: center;">
+        <!-- soon:tm: -->
+        <div class="moreitems" onclick="expandmenu()">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <center><div id="navbar">
             <snap class="menuitem" onclick="p('home')">Home</snap>
             <snap class="menuitem" onclick="p('donate')">Donate</snap>
             <snap class="menuitem" onclick="p('contact')">Contact me</snap>
@@ -190,8 +233,6 @@
             That is it for now I guess..
         </div>
 
-        <div id="tooltip" style="position: absolute; padding: 10px; border-radius: 15px; background-color: #1c1c1c; display: none;">
-            Tooltip text
-        </div>
+        <div id="tooltip"></div>
     </body>
 </html>
