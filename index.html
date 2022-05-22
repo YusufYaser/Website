@@ -66,6 +66,10 @@
                 display: none;
             }
 
+            r {
+                color: red;
+            }
+
             @media only screen and (max-width: 420px) {
                 .menuitem {
                     font-size: 18px;
@@ -195,23 +199,15 @@
         </div>
         <center><div id="navbar">
             <snap class="menuitem" onclick="p('home')">Home</snap>
-            <snap class="menuitem" onclick="p('donate')">Donate</snap>
             <snap class="menuitem" onclick="p('contact')">Contact me</snap>
             <snap class="menuitem" onclick="p('about')">About me</snap>
+            <!--<snap class="menuitem" onclick="p('hire')">Hire me</snap>-->
         </div></center>
         
         <div id="p_home" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
-            <strong><snap style="font-size: 35px;">Hello, I'm <snap style="color: red">Yusuf</snap></snap></strong>
+            <strong><snap style="font-size: 35px;">Hello, I'm <r>Yusuf</r></snap></strong>
             </br>
             Backend Developer
-        </div>
-
-        <div id="p_donate" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
-            <strong><snap style="font-size: 35px;"><center>You can <snap style="color: red">donate</snap> to me on <snap style="color: blue; text-decoration: underline;" onclick="l('https://ko-fi.com/yusufyaser')" onmouseover="tooltip('https://ko-fi.com/yusufyaser')" onmouseout="htooltip()">here</snap></center></snap></strong></br></br>
-            <!--<strong><snap style="font-size: 25px;">This is not necessarily donating, but you can use these <snap style="color: red">referral codes</snap>:</snap></strong></br><snap style="font-size: 10px;">(ok more like this referral code only but yeah)</snap>
-            
-            if you see this, yeah that is not here yet
-        -->
         </div>
 
         <div id="p_contact" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
@@ -224,15 +220,35 @@
         </div>
 
         <div id="p_about" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
-            <strong><snap style="font-size: 35px;"><center>About <snap style="color: red">me</snap></center></snap></strong>
+            <strong><snap style="font-size: 35px;"><center>About <r>me</r></center></snap></strong>
             </br></br>
+            <!--I am <r>YusufYaser</r>, a full-stack developer and more advanced on backend.</br>
+            I code <r>websites' backend</r> in PHP. I also have experience in Linux, specifically <r>Ubuntu</r>.</br></br>
+
+            I manage servers and code websites while -->
             Hello! I am <snap style="color: red">YusufYaser</snap>. I'm a <snap style="color: red">backend developer</snap> and starting to learn frontend.
             I like helping people with their problems. I also like playing some games like <snap style="color: red">Minecraft</snap> and <snap style="color: red">GTA 5</snap>.</br>
             I'm also an <snap style="color: red">beginner</snap> at cyber security and looking forward to learn more about it.</br></br>
-            
             That is it for now I guess..
         </div>
 
+        <div id="p_hire" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
+            <strong><snap style="font-size: 35px;"><center>Hire <r>me</snap></center></snap></strong>
+            </br></br>
+            
+        </div>
+
         <div id="tooltip"></div>
+
+        <!-- Ko-fi tells me to put it at the end of the body tag for some reason -->
+        <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+        <script>
+            kofiWidgetOverlay.draw('yusufyaser', {
+            'type': 'floating-chat',
+            'floating-chat.donateButton.text': 'Donate',
+            'floating-chat.donateButton.background-color': '#794bc4',
+            'floating-chat.donateButton.text-color': '#fff'
+            });
+        </script>
     </body>
 </html>
