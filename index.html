@@ -55,7 +55,6 @@
             #navbar {
                 font-size: 20px;
                 padding: 15px;
-                float: center;
             }
             
             #tooltip {
@@ -68,6 +67,15 @@
 
             r {
                 color: red;
+            }
+
+            a {
+                color: rgb(79, 79, 255);
+                text-decoration: underline;
+            }
+
+            .page {
+                position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;
             }
 
             @media only screen and (max-width: 420px) {
@@ -89,6 +97,9 @@
                 var p = document.getElementById("p_" + page);
                 p.style.opacity = 0;
                 p.style.display = 'block';
+                var urlpage = page;
+                if (urlpage == "home") urlpage = "";
+                history.pushState(null, page, location.protocol + "//" + location.host + "/" + urlpage);
                 var int;
                 var o = 0.0;
                 var b = 100;
@@ -139,6 +150,7 @@
                         var o = 0.0;
                         n.style.opacity = o;
                         n.style.display = 'block';
+                        document.querySelector(".floatingchat-container-wrap").style.display = "block";
                         document.body.style.cursor = '';
                         int = setInterval(() => {
                             if (n.style.opacity == 1) {
@@ -157,6 +169,7 @@
                             if (n.style.opacity <= 0) {
                                 n.style.display = 'none';
                                 document.body.style.cursor = 'none';
+                                document.querySelector(".floatingchat-container-wrap").style.display = "none";
                                 clearInterval(int);
                                 return;
                             }
@@ -179,7 +192,18 @@
             });
 
             setTimeout(() => {
-                p("home");
+                var path = location.pathname.substr(1);
+                if (!path) {
+                    p("home");
+                    return;
+                }
+                
+                if (!document.querySelector("#p_" + path)) {
+                    p("404");
+                    return;
+                }
+
+                p(path);
             }, 250);
 
             // soon:tm:
@@ -199,43 +223,47 @@
         </div>
         <center><div id="navbar">
             <snap class="menuitem" onclick="p('home')">Home</snap>
+            <snap class="menuitem" onclick="p('hire')">Hire me</snap>
             <snap class="menuitem" onclick="p('contact')">Contact me</snap>
             <snap class="menuitem" onclick="p('about')">About me</snap>
-            <!--<snap class="menuitem" onclick="p('hire')">Hire me</snap>-->
         </div></center>
         
-        <div id="p_home" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
-            <strong><snap style="font-size: 35px;">Hello, I'm <r>Yusuf</r></snap></strong>
+        <div id="p_home" class="page">
+            <strong><snap style="font-size: 35px;">Hello, I'm <r>Yusuf Yaser</r></snap></strong>
             </br>
-            Backend Developer
+            Backend Developer &bullet; System Administrator
         </div>
 
-        <div id="p_contact" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
+        <div id="p_contact" class="page">
             <strong><snap style="font-size: 35px;">You can contact me through:</snap></strong>
             </br></br>
             <center>
                 <img style="width: 50px; height: 50px;" onmouseover="tooltip('YusufYaser&#35;7242')" onmouseout="htooltip()" src="Discord.png"></img>
-                <img style="width: 65px; height: 50px;" onmouseover="tooltip('@RealYusufYaser')" onmouseout="htooltip()" src="Twitter.png"></img>
+                <a href="https://twitter.com/RealYusufYaser" target="_blank"><img style="width: 65px; height: 50px;" onmouseover="tooltip('@RealYusufYaser')" onmouseout="htooltip()" src="Twitter.png"></img></a>
             </center>
         </div>
 
-        <div id="p_about" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
+        <div id="p_about" class="page">
             <strong><snap style="font-size: 35px;"><center>About <r>me</r></center></snap></strong>
             </br></br>
-            <!--I am <r>YusufYaser</r>, a full-stack developer and more advanced on backend.</br>
-            I code <r>websites' backend</r> in PHP. I also have experience in Linux, specifically <r>Ubuntu</r>.</br></br>
+            Hello there, I am <r>Yusuf Yaser</r>, a backend developer and a system administrator.</br>
+            I code <r>websites' backend</r> in PHP and usually some other languages. I also have experience in Linux, specifically <r>Ubuntu</r>.</br></br>
 
-            I manage servers and code websites while -->
-            Hello! I am <snap style="color: red">YusufYaser</snap>. I'm a <snap style="color: red">backend developer</snap> and starting to learn frontend.
-            I like helping people with their problems. I also like playing some games like <snap style="color: red">Minecraft</snap> and <snap style="color: red">GTA 5</snap>.</br>
-            I'm also an <snap style="color: red">beginner</snap> at cyber security and looking forward to learn more about it.</br></br>
-            That is it for now I guess..
+            I use <r>Visual Studio Code</r> to code my projects and software.
+            I am starting to learn <r>frontend</r> and the basics of it and become a full-stack developer.
         </div>
 
-        <div id="p_hire" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
-            <strong><snap style="font-size: 35px;"><center>Hire <r>me</snap></center></snap></strong>
+        <div id="p_hire" class="page">
+            <strong><snap style="font-size: 35px;"><center>Hire <r>me</r></center></snap></strong>
             </br></br>
-            
+            You may <r onclick="p('contact')" style="cursor: pointer;">contact me</r> through <a onmouseover="tooltip('YusufYaser&#35;7242')" onmouseout="htooltip()">Discord</a> or through <a href="mailto:me@yusufyaser.xyz" onmouseover="tooltip('me@yusufyaser.xyz')" onmouseout="htooltip()">Email</a>
+            to discuss the job together and get a quote.
+        </div>
+
+        <div id="p_404" class="page">
+            <strong><snap style="font-size: 35px;"><center>Page <r>not found</r></center></snap></strong>
+            </br></br>
+            This page was not found on this site.
         </div>
 
         <div id="tooltip"></div>
