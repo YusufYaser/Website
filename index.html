@@ -65,6 +65,18 @@
                 display: none;
             }
 
+            .cursor {
+                position: absolute;
+                padding: 6px;
+                background: gray;
+                border-radius: 50%;
+                border: 2px solid lightgray;
+                opacity: 0;
+                pointer-events: none;
+                left: -999;
+                display: none;
+            }
+
             r {
                 color: red;
             }
@@ -75,8 +87,17 @@
             }
 
             .page {
-                position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                opacity: 0;
+                display: none;
             }
+
+            /** {
+                cursor: none;
+            }*/
 
             @media only screen and (max-width: 420px) {
                 .menuitem {
@@ -87,32 +108,56 @@
         </style>
 
         <script>
+            var CurrentPage = "none";
+
             function p(page) {
+                if (page === CurrentPage) return;
+                var PreviousPage = CurrentPage;
+                CurrentPage = page;
                 var elements = document.getElementsByTagName("div");
-                for (i = 0; i < elements.length; i++) {
-                    if (elements[i].id.match(/p_.*/g)) {
-                        elements[i].style.display = 'none';
-                    }
-                }
                 var p = document.getElementById("p_" + page);
-                p.style.opacity = 0;
-                p.style.display = 'block';
+                var old = document.getElementById("p_" + PreviousPage);
+                p.style.display = "block";
+                p.style.paddingBottom = 0;
                 var urlpage = page;
                 if (urlpage == "home") urlpage = "";
                 history.pushState(null, page, location.protocol + "//" + location.host + "/" + urlpage);
                 var int;
                 var o = 0.0;
                 var b = 100;
-                int = setInterval(() => {
-                    if (p.style.opacity == 1) {
-                        clearInterval(int);
-                        return;
-                    }
-                    o += 0.1;
-                    b -= 10;
-                    p.style.opacity = o;
-                    p.style.paddingTop = b;
-                }, 20);
+                var oo = 1.0;
+                var ob = 0;
+
+                if (old) {
+                    int = setInterval(() => {
+                        if (ob >= 200) {
+                            clearInterval(int);
+                            old && (old.style.display = "none");
+                            return;
+                        } else if (ob >= 100) {
+                            if (p.style.opacity == 1) {
+                                clearInterval(int);
+                                old && (old.style.display = "none");
+                                return;
+                            }
+                            o += 0.1;
+                            b -= 10;
+                            p.style.opacity = o;
+                            p.style.paddingTop = b;
+
+                            if (!old) return;
+                            ob += 10;
+                            old.style.opacity = oo;
+                            old.style.paddingBottom = ob;
+
+                            return;
+                        }
+                        oo -= 0.1;
+                        ob += 10;
+                        old.style.opacity = oo;
+                        old.style.paddingBottom = ob;
+                    }, 10);
+                }
             }
 
             function tooltip(text) {
@@ -151,7 +196,6 @@
                         n.style.opacity = o;
                         n.style.display = 'block';
                         document.querySelector(".floatingchat-container-wrap").style.display = "block";
-                        document.body.style.cursor = '';
                         int = setInterval(() => {
                             if (n.style.opacity == 1) {
                                 clearInterval(int);
@@ -168,7 +212,6 @@
                         int = setInterval(() => {
                             if (n.style.opacity <= 0) {
                                 n.style.display = 'none';
-                                document.body.style.cursor = 'none';
                                 document.querySelector(".floatingchat-container-wrap").style.display = "none";
                                 clearInterval(int);
                                 return;
@@ -185,11 +228,24 @@
                 return false;
             }
 
-            document.addEventListener('mousemove', function(event) {
-                var e = document.getElementById("tooltip");
-                e.style.left = event.pageX;
-                e.style.top = event.pageY + 25;
+            document.addEventListener('mousemove', function(e) {
+                var tooltip = document.querySelector("#tooltip");
+                var cursor = document.querySelector(".cursor");
+
+                tooltip.style.left = e.pageX;
+                tooltip.style.top = e.pageY + 25;
+
+                cursor.style.left = e.pageX - 8;
+                cursor.style.top = e.pageY - 8;
             });
+
+            document.onmousedown = function(e) {
+                document.querySelector(".cursor").style.background = "lightgray";
+            };
+
+            document.onmouseup = function(e) {
+                document.querySelector(".cursor").style.background = "gray";
+            };
 
             setTimeout(() => {
                 var path = location.pathname.substr(1);
@@ -204,6 +260,17 @@
                 }
 
                 p(path);
+
+                var opacity = 0.0;
+                if ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) return;
+                int = setInterval(() => {
+                    if (opacity >= 0.5) {
+                        clearInterval(int);
+                        return;
+                    }
+                    opacity += 0.1;
+                    document.querySelector(".cursor").style.opacity = opacity;
+                }, 20);
             }, 250);
 
             // soon:tm:
@@ -227,6 +294,8 @@
             <snap class="menuitem" onclick="p('contact')">Contact me</snap>
             <snap class="menuitem" onclick="p('about')">About me</snap>
         </div></center>
+
+        <div id="p_none" class="page"></div>
         
         <div id="p_home" class="page">
             <strong><snap style="font-size: 35px;">Hello, I'm <r>Yusuf Yaser</r></snap></strong>
@@ -267,6 +336,7 @@
         </div>
 
         <div id="tooltip"></div>
+        <span class="cursor"></span>
 
         <!-- Ko-fi tells me to put it at the end of the body tag for some reason -->
         <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
