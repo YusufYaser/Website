@@ -66,6 +66,7 @@
                 border-radius: 15px;
                 background-color: #1c1c1c;
                 display: none;
+                opacity: 0.0;
             }
 
             .cursor {
@@ -168,24 +169,41 @@
                 }, 10);
             }
 
+            var TooltipInt = 0;
+            var opacity = 0.0;
             function tooltip(text) {
+                TooltipInt != 0 && clearInterval(TooltipInt);
                 var e = document.getElementById("tooltip");
                 e.innerHTML = text;
-                e.style.opacity = 0;
                 e.style.display = 'block';
-                var o = 0.0;
-                int = setInterval(() => {
-                    if (e.style.opacity == 1) {
+                
+                TooltipInt = setInterval(() => {
+                    if (opacity >= 1) {
+                        var int = TooltipInt;
+                        TooltipInt = 0;
                         clearInterval(int);
                         return;
                     }
-                    o += 0.1;
-                    e.style.opacity = o;
+                    opacity += 0.1;
+                    e.style.opacity = opacity;
                 }, 15);
             }
 
             function htooltip() {
-                document.getElementById("tooltip").style.display = 'none';
+                TooltipInt != 0 && clearInterval(TooltipInt);
+                var e = document.getElementById("tooltip");
+                
+                TooltipInt = setInterval(() => {
+                    if (opacity <= 0) {
+                        e.style.display = 'none';
+                        var int = TooltipInt;
+                        TooltipInt = 0;
+                        clearInterval(int);
+                        return;
+                    }
+                    opacity -= 0.1;
+                    e.style.opacity = opacity;
+                }, 15);
             }
 
             function l(t) {
