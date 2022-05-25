@@ -46,9 +46,6 @@
             #navbar {
                 font-size: 20px;
                 padding: 15px;
-                position: absolute;
-                left: 50%;
-                transform: translate(-50%);
             }
             
             #tooltip {
@@ -96,12 +93,7 @@
 
             @media only screen and (max-width: 420px) {
                 .menuitem {
-                    font-size: 18px;
-                }
-
-                #navbar {
-                    left: 0;
-                    transform: translate(0%);
+                    padding: 1px;
                 }
             }
         </style>
@@ -314,10 +306,12 @@
 
     <body id="particles-js">
         <div id="navbar">
-            <snap class="menuitem" onclick="p('home')">Home</snap>
-            <snap class="menuitem" onclick="p('hire')">Hire me</snap>
-            <snap class="menuitem" onclick="p('contact')">Contact me</snap>
-            <snap class="menuitem" onclick="p('about')">About me</snap>
+            <center>
+                <snap class="menuitem" onclick="p('home')">Home</snap>
+                <snap class="menuitem" onclick="p('hire')">Hire me</snap>
+                <snap class="menuitem" onclick="p('contact')">Contact me</snap>
+                <snap class="menuitem" onclick="p('about')">About me</snap>
+            </center>
         </div>
 
         <div id="p_none" class="page"></div>
