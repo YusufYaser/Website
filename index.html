@@ -45,8 +45,6 @@
 
             .moreitems {
                 width: fit-content;
-                border: solid rgb(128, 128, 128);
-                background-color: rgb(128, 128, 128, 0.2);
                 border-radius: 15px;
                 padding: 5px;
                 display: none;
@@ -106,7 +104,16 @@
             @media only screen and (max-width: 420px) {
                 .menuitem {
                     font-size: 18px;
-                    font-weight: bold;
+                }
+
+                .moreitems {
+                    display: block;
+                }
+
+                #navbar {
+                    display: none;
+                    left: 0;
+                    transform: translate(0%);
                 }
             }
         </style>
@@ -162,7 +169,7 @@
 
                         return;
                     }
-                    oo -= 0.01;
+                    oo -= 0.05;
                     ob += 10;
                     old.style.opacity = oo;
                     old.style.paddingBottom = ob;
@@ -318,7 +325,30 @@
             // soon:tm:
             function expandmenu() {
                 var e = document.getElementById("navbar");
-                e.style.display == "none" ? e.style.display = "block" : e.style.display == "none";
+                if (e.style.display == "none" || e.style.display == "") {
+                    var opacity = 0.0;
+                    e.style.opacity = 0.0;
+                    e.style.display = "block";
+                    int = setInterval(() => {
+                        if (opacity >= 1.0) {
+                            clearInterval(int);
+                            return;
+                        }
+                        opacity += 0.1;
+                        e.style.opacity = opacity;
+                    }, 20);
+                } else {
+                    var opacity = 1.0;
+                    int = setInterval(() => {
+                        if (opacity <= 0.0) {
+                            e.style.display = "none";
+                            clearInterval(int);
+                            return;
+                        }
+                        opacity -= 0.1;
+                        e.style.opacity = opacity;
+                    }, 20);
+                }
             }
         </script>
     </head>
