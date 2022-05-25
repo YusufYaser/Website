@@ -18,9 +18,6 @@
                 -ms-user-select: none;
                 user-select: none;
                 overflow: hidden;
-                display: flex;
-                align-items: center;
-                justify-content: center;
             }
 
             .menuitem {
@@ -59,7 +56,8 @@
                 font-size: 20px;
                 padding: 15px;
                 position: absolute;
-                top: 0;
+                left: 50%;
+                transform: translate(-50%);
             }
             
             #tooltip {
@@ -94,11 +92,11 @@
 
             .page {
                 position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
                 opacity: 0;
                 display: none;
-                text-align: center;
-                margin-left: 25%;
-                margin-right: 25%;
             }
 
             /** {
@@ -107,12 +105,8 @@
 
             @media only screen and (max-width: 420px) {
                 .menuitem {
-                    padding: 0;
-                }
-
-                .page {
-                    margin-left: 10%;
-                    margin-right: 10%;
+                    font-size: 18px;
+                    font-weight: bold;
                 }
             }
         </style>
