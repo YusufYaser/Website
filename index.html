@@ -95,10 +95,6 @@
                 color: lightgray;
             }
 
-            /** {
-                cursor: none;
-            }*/
-
             @media only screen and (max-width: 420px) {
                 .menuitem {
                     padding: 1px;
@@ -220,13 +216,18 @@
             var MenuToggling = false;
             document.addEventListener('keydown', function(event) {
                 if (!event.ctrlKey || event.key != 'x' || MenuToggling) return;
+                var navbar = document.getElementById("navbar");
+                var donate = document.querySelector(".floatingchat-container-wrap");
+                var cursor = document.querySelector(".cursor");
+                var copyright = document.querySelector(".copyright");
+
                 MenuToggling = true;
 
                 if (hidden) {
-                    var navbar = document.getElementById("navbar");
-                    var donate = document.querySelector(".floatingchat-container-wrap");
                     navbar.style.display = 'block';
                     donate.style.display = 'block';
+                    cursor.style.display = 'block';
+                    copyright.style.display = 'block';
 
                     var opacity = 0.0;
 
@@ -240,14 +241,13 @@
                         opacity += 0.1;
                         navbar.style.opacity = opacity;
                         donate.style.opacity = opacity;
+                        copyright.style.opacity = opacity;
+                        if (opacity <= 0.7) cursor.style.opacity = opacity;
                     }, 20);
 
                     hidden = !hidden;
                     return;
                 }
-
-                var navbar = document.getElementById("navbar");
-                var donate = document.querySelector(".floatingchat-container-wrap");
 
                 var opacity = 1.0;
 
@@ -256,6 +256,8 @@
                         MenuToggling = false;
                         navbar.style.display = 'none';
                         donate.style.display = 'none';
+                        cursor.style.display = 'none';
+                        copyright.style.display = 'none';
                         clearInterval(int);
                         return;
                     }
@@ -263,6 +265,8 @@
                     opacity -= 0.1;
                     navbar.style.opacity = opacity;
                     donate.style.opacity = opacity;
+                    copyright.style.opacity = opacity;
+                    if (opacity <= 0.7) cursor.style.opacity = opacity;
                 }, 20);
 
                 hidden = !hidden;
@@ -353,7 +357,7 @@
         <div id="tooltip"></div>
         <img class="cursor" src="/Cursor.png"></img>
 
-        <p class="copyright">&copy; 2022 Copyright Yusuf Yaser</p>
+        <p class="copyright">&copy; 2022 Yusuf Yaser</p>
 
         <!-- Ko-fi tells me to put it at the end of the body tag for some reason -->
         <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
