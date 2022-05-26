@@ -18,10 +18,10 @@
                 -ms-user-select: none;
                 user-select: none;
                 overflow: hidden;
+                cursor: none;
             }
 
             .menuitem {
-                cursor: pointer;
                 padding: 5px;
             }
 
@@ -59,14 +59,12 @@
 
             .cursor {
                 position: absolute;
-                padding: 6px;
-                background: gray;
-                border-radius: 50%;
-                border: 2px solid lightgray;
-                opacity: 0;
-                pointer-events: none;
                 left: -999;
-                display: none;
+                height: 24px;
+                width: 24px;
+                pointer-events: none;
+                opacity: 0.7;
+                z-index: 99999999999;
             }
 
             r {
@@ -76,6 +74,7 @@
             a {
                 color: rgb(79, 79, 255);
                 text-decoration: underline;
+                cursor: none;
             }
 
             .page {
@@ -87,6 +86,15 @@
                 display: none;
             }
 
+            .copyright {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                padding-right: 10px;
+                font-size: 18px;
+                color: lightgray;
+            }
+
             /** {
                 cursor: none;
             }*/
@@ -94,6 +102,11 @@
             @media only screen and (max-width: 420px) {
                 .menuitem {
                     padding: 1px;
+                }
+
+                .cursor {
+                    display: none;
+                    left: -99999 !important;
                 }
             }
         </style>
@@ -115,8 +128,8 @@
                 p.style.display = "block";
                 p.style.paddingBottom = 0;
                 var urlpage = page;
-                if (urlpage == "home") urlpage = "";
-                history.pushState(null, page, location.protocol + "//" + location.host + "/" + urlpage);
+                if (urlpage === "home") urlpage = "";
+                if (urlpage !== "404") history.pushState(null, page, location.protocol + "//" + location.host + "/" + urlpage);
                 var int;
                 var o = 0.0;
                 var b = 100;
@@ -216,7 +229,6 @@
                     int = setInterval(() => {
                         if (opacity >= 1) {
                             MenuToggling = false;
-                            document.body.style.cursor = '';
                             clearInterval(int);
                             return;
                         }
@@ -240,7 +252,6 @@
                         MenuToggling = false;
                         navbar.style.display = 'none';
                         donate.style.display = 'none';
-                        document.body.style.cursor = 'none';
                         clearInterval(int);
                         return;
                     }
@@ -261,20 +272,12 @@
                 var tooltip = document.querySelector("#tooltip");
                 var cursor = document.querySelector(".cursor");
 
-                tooltip.style.left = e.pageX;
+                tooltip.style.left = e.pageX - (tooltip.clientWidth / 2);
                 tooltip.style.top = e.pageY + 25;
 
-                cursor.style.left = e.pageX - 8;
-                cursor.style.top = e.pageY - 8;
+                cursor.style.left = e.pageX;
+                cursor.style.top = e.pageY;
             });
-
-            document.onmousedown = function(e) {
-                document.querySelector(".cursor").style.background = "lightgray";
-            };
-
-            document.onmouseup = function(e) {
-                document.querySelector(".cursor").style.background = "gray";
-            };
 
             setTimeout(() => {
                 var path = location.pathname.substr(1);
@@ -289,17 +292,6 @@
                 }
 
                 p(path);
-
-                var opacity = 0.0;
-                if ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) return;
-                int = setInterval(() => {
-                    if (opacity >= 0.5) {
-                        clearInterval(int);
-                        return;
-                    }
-                    opacity += 0.1;
-                    document.querySelector(".cursor").style.opacity = opacity;
-                }, 20);
             }, 250);
         </script>
     </head>
@@ -322,8 +314,15 @@
             Backend Developer &bullet; System Administrator
         </div>
 
+        <div id="p_hire" class="page">
+            <strong><snap style="font-size: 35px;"><center>Hire <r>me</r></center></snap></strong>
+            </br></br>
+            You may <r onclick="p('contact')">contact me</r> through <a onmouseover="tooltip('YusufYaser&#35;7242')" onmouseout="htooltip()">Discord</a> or through <a href="mailto:me@yusufyaser.xyz" onmouseover="tooltip('me@yusufyaser.xyz')" onmouseout="htooltip()">Email</a>
+            to discuss the job together and get a quote.
+        </div>
+
         <div id="p_contact" class="page">
-            <strong><snap style="font-size: 35px;">You can contact me through:</snap></strong>
+            <strong><snap style="font-size: 35px;">You can <r>contact me</r> through:</snap></strong>
             </br></br>
             <center>
                 <img style="width: 50px; height: 50px;" onmouseover="tooltip('YusufYaser&#35;7242')" onmouseout="htooltip()" src="Discord.png"></img>
@@ -341,13 +340,6 @@
             I am starting to learn <r>frontend</r> and the basics of it and become a full-stack developer.
         </div>
 
-        <div id="p_hire" class="page">
-            <strong><snap style="font-size: 35px;"><center>Hire <r>me</r></center></snap></strong>
-            </br></br>
-            You may <r onclick="p('contact')" style="cursor: pointer;">contact me</r> through <a onmouseover="tooltip('YusufYaser&#35;7242')" onmouseout="htooltip()">Discord</a> or through <a href="mailto:me@yusufyaser.xyz" onmouseover="tooltip('me@yusufyaser.xyz')" onmouseout="htooltip()">Email</a>
-            to discuss the job together and get a quote.
-        </div>
-
         <div id="p_404" class="page">
             <strong><snap style="font-size: 35px;"><center>Page <r>not found</r></center></snap></strong>
             </br>
@@ -355,7 +347,9 @@
         </div>
 
         <div id="tooltip"></div>
-        <span class="cursor"></span>
+        <img class="cursor" src="/Cursor.png"></img>
+
+        <p class="copyright">&copy; 2022 Copyright Yusuf Yaser</p>
 
         <!-- Ko-fi tells me to put it at the end of the body tag for some reason -->
         <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
