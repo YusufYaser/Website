@@ -95,6 +95,12 @@
                 color: lightgray;
             }
 
+            .particles-js-canvas-el {
+                position: absolute;
+                top: 0;
+                z-index: -99999999999999999;
+            }
+
             @media only screen and (max-width: 420px) {
                 .menuitem {
                     padding: 1px;
@@ -107,6 +113,10 @@
 
                 .copyright {
                     display: none;
+                }
+
+                .particles-js-canvas-el {
+                    position: static;
                 }
             }
         </style>
@@ -174,7 +184,7 @@
             function tooltip(text) {
                 TooltipInt != 0 && clearInterval(TooltipInt);
                 var e = document.getElementById("tooltip");
-                e.innerHTML = text;
+                e.innerText = text;
                 e.style.display = 'block';
                 
                 TooltipInt = setInterval(() => {
@@ -216,20 +226,16 @@
             var MenuToggling = false;
             document.addEventListener('keydown', function(event) {
                 if (!event.ctrlKey || event.key != 'x' || MenuToggling) return;
-                var navbar = document.getElementById("navbar");
-                var donate = document.querySelector(".floatingchat-container-wrap");
-                var cursor = document.querySelector(".cursor");
-                var copyright = document.querySelector(".copyright");
+                document.querySelector(".floatingchat-container-wrap").setAttribute("hideable", "");
 
                 MenuToggling = true;
 
                 if (hidden) {
-                    navbar.style.display = 'block';
-                    donate.style.display = 'block';
-                    cursor.style.display = 'block';
-                    copyright.style.display = 'block';
-
                     var opacity = 0.0;
+                    
+                    document.querySelectorAll("[hideable]").forEach(e => {
+                        e.style.display = "block";
+                    });
 
                     int = setInterval(() => {
                         if (opacity >= 1) {
@@ -239,10 +245,14 @@
                         }
                         
                         opacity += 0.1;
-                        navbar.style.opacity = opacity;
-                        donate.style.opacity = opacity;
-                        copyright.style.opacity = opacity;
-                        if (opacity <= 0.7) cursor.style.opacity = opacity;
+                        
+                        document.querySelectorAll("[hideable]").forEach(e => {
+                            e.style.opacity = opacity;
+
+                            if (e.classList.contains("cursor") && opacity >= 0.7) {
+                                e.style.opacity = 0.7;
+                            }
+                        });
                     }, 20);
 
                     hidden = !hidden;
@@ -254,19 +264,24 @@
                 int = setInterval(() => {
                     if (opacity <= 0) {
                         MenuToggling = false;
-                        navbar.style.display = 'none';
-                        donate.style.display = 'none';
-                        cursor.style.display = 'none';
-                        copyright.style.display = 'none';
+                    
+                        document.querySelectorAll("[hideable]").forEach(e => {
+                            e.style.display = "none";
+                        });
+
                         clearInterval(int);
                         return;
                     }
 
                     opacity -= 0.1;
-                    navbar.style.opacity = opacity;
-                    donate.style.opacity = opacity;
-                    copyright.style.opacity = opacity;
-                    if (opacity <= 0.7) cursor.style.opacity = opacity;
+                    
+                    document.querySelectorAll("[hideable]").forEach(e => {
+                        e.style.opacity = opacity;
+
+                        if (e.classList.contains("cursor") && opacity >= 0.7) {
+                            e.style.opacity = 0.7;
+                        }
+                    });
                 }, 20);
 
                 hidden = !hidden;
@@ -299,17 +314,22 @@
                     return;
                 }
 
+                document.querySelectorAll("[tooltip]").forEach((e) => {
+                    e.setAttribute("onmouseover", 'tooltip("' + e.getAttribute("tooltip-text") + '")');
+                    e.setAttribute("onmouseout", 'htooltip()');
+                });
+
                 p(path);
             }, 250);
         </script>
     </head>
 
     <body id="particles-js">
-        <div id="navbar">
+        <div id="navbar" hideable>
             <center>
                 <snap class="menuitem" onclick="p('home')">Home</snap>
                 <snap class="menuitem" onclick="p('hire')">Hire me</snap>
-                <snap class="menuitem" onclick="p('contact')">Contact me</snap>
+                <snap class="menuitem" onclick="p('find')">Find me</snap>
                 <snap class="menuitem" onclick="p('about')">About me</snap>
             </center>
         </div>
@@ -325,16 +345,18 @@
         <div id="p_hire" class="page">
             <strong><snap style="font-size: 35px;"><center>Hire <r>me</r></center></snap></strong>
             </br></br>
-            You may <r onclick="p('contact')">contact me</r> through <a onmouseover="tooltip('YusufYaser&#35;7242')" onmouseout="htooltip()">Discord</a> or through <a href="mailto:me@yusufyaser.xyz" onmouseover="tooltip('me@yusufyaser.xyz')" onmouseout="htooltip()">Email</a>
+            You may <r onclick="p('find')">contact me</r> through <a tooltip tooltip-text="YusufYaser#7242">Discord</a> or through <a href="mailto:me@yusufyaser.xyz" tooltip tooltip-text="me@yusufyaser.xyz">Email</a>
             to discuss the job together and get a quote.
         </div>
 
-        <div id="p_contact" class="page">
-            <strong><snap style="font-size: 35px;">You can <r>contact me</r> through:</snap></strong>
+        <div id="p_find" class="page">
+            <strong><snap style="font-size: 35px;">You can <r>find me</r> on one of these:</snap></strong>
             </br></br>
             <center>
-                <img style="width: 50px; height: 50px;" onmouseover="tooltip('YusufYaser&#35;7242')" onmouseout="htooltip()" src="Discord.png"></img>
-                <a href="https://twitter.com/RealYusufYaser" target="_blank"><img style="width: 65px; height: 50px;" onmouseover="tooltip('@RealYusufYaser')" onmouseout="htooltip()" src="Twitter.png"></img></a>
+                <a href="https://github.com/YusufYaser" target="_blank"><img style="width: 65px; height: 65px;" tooltip tooltip-text="YusufYaser" src="GitHub.png"></img></a>
+                <img style="width: 65px; height: 65px;" tooltip tooltip-text="YusufYaser#7242" src="Discord.png"></img>
+                <a href="https://twitter.com/RealYusufYaser" target="_blank"><img style="width: 80px; height: 65px;" tooltip tooltip-text="@RealYusufYaser" src="Twitter.png"></img></a>
+                <a href="https://ko-fi.com/YusufYaser" target="_blank"><img style="width: 65px; height: 65px;" tooltip tooltip-text="YusufYaser" src="Ko-fi.png"></img></a>
             </center>
         </div>
 
@@ -355,9 +377,9 @@
         </div>
 
         <div id="tooltip"></div>
-        <img class="cursor" src="/Cursor.png"></img>
+        <img class="cursor" src="/Cursor.png" hideable></img>
 
-        <p class="copyright">&copy; 2022 Yusuf Yaser</p>
+        <p class="copyright" hideable>&copy; 2022 Yusuf Yaser</p>
 
         <!-- Ko-fi tells me to put it at the end of the body tag for some reason -->
         <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
