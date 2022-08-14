@@ -304,6 +304,13 @@
 
             setTimeout(() => {
                 var path = location.pathname.substr(1);
+
+                document.querySelectorAll("[tooltip]").forEach((e) => {
+                    e.setAttribute("onmouseover", 'tooltip("' + e.getAttribute("tooltip-text") + '")');
+                    e.setAttribute("onmouseout", 'htooltip()');
+                    console.log(e);
+                });
+
                 if (!path) {
                     p("home");
                     return;
@@ -313,11 +320,6 @@
                     p("404");
                     return;
                 }
-
-                document.querySelectorAll("[tooltip]").forEach((e) => {
-                    e.setAttribute("onmouseover", 'tooltip("' + e.getAttribute("tooltip-text") + '")');
-                    e.setAttribute("onmouseout", 'htooltip()');
-                });
 
                 p(path);
             }, 500);
