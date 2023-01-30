@@ -1,0 +1,65 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #000;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+h1 {
+    font-family: 'Denk One';
+}
+
+hr {
+    margin: 10px;
+}
+
+@keyframes downanim {
+    0% {
+        padding-top: 0px;
+        padding-bottom: 20px;
+    }
+    50% {
+        padding-top: 20px;
+        padding-bottom: 0px;
+    }
+    100% {
+        padding-top: 0px;
+        padding-bottom: 20px;
+    }
+}
+
+.downarrow {
+    animation: downanim 1.5s infinite;
+    font-size: 4rem;
+}
+
+.section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    flex: 1;
+}
+
+.icon {
+    width: 16rem;
+    height: 16rem;
+    padding: 3rem;
+    font-size: 10rem;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
