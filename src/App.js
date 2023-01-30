@@ -1,14 +1,13 @@
 import { faArrowDown, faQuestion } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Scroll from "react-scroll";
+import Scroll from "react-scroll"
 import fiverrIcon from './assets/fiverr.svg'
 import githubIcon from './assets/github.svg'
 import twitterIcon from './assets/twitter.svg'
 
 function App() {
-    //
     return (
-        <div className="content">
+        <div>
             <div className="section">
                 <center className="content">
                     <h1>Hey there, my name is Yusuf Yaser!</h1>
@@ -42,10 +41,12 @@ function App() {
                     <a
                         href={"https://fiverr.com/yusufyaser"}
                         target={"_blank"}
+                        rel={"noreferrer"}
                     >
                         <img
                             src={fiverrIcon}
                             className="icon"
+                            alt={"YusufYaser's Fiverr Page"}
                         />
                     </a>
                     <FontAwesomeIcon
@@ -62,20 +63,36 @@ function App() {
                 <center className="content">
                     <h1>Find me</h1>
 
-                    <img
-                        className="icon"
-                        src={githubIcon}
-                    />
-                    <img
-                        className="icon"
-                        src={twitterIcon}
-                    />
+                    <a
+                        href={"https://github.com/YusufYaser"}
+                        target={"_blank"}
+                        rel={"noreferrer"}
+                    >
+                        <img
+                            className="icon"
+                            src={githubIcon}
+                            alt={"YusufYaser's GitHub Page"}
+                        />
+                    </a>
+                    <a
+                        href={"https://twitter.com/RealYusufYaser"}
+                        target={"_blank"}
+                        rel={"noreferrer"}
+                    >
+                        <img
+                            className="icon"
+                            src={twitterIcon}
+                            alt={"YusufYaser's Twitter Page"}
+                        />
+                    </a>
                 </center>
             </div>
 
             <div className="section">
                 <center className="content">
                     unfinished, will be updated more soon ;)
+                    <br/><br/>
+                    <strong>Copyright &copy; 2023 ~ Yusuf Yaser</strong>
                 </center>
             </div>
         </div>
