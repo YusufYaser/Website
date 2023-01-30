@@ -6,6 +6,7 @@ import githubIcon from './assets/github.svg'
 import twitterIcon from './assets/twitter.svg'
 
 function App() {
+    //
     return (
         <div className="content">
             <div className="section">
