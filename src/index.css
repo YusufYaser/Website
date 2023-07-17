@@ -54,6 +54,20 @@ hr {
 .content {
     flex: 1;
     z-index: 5;
+    background-color: rgba(0, 0, 0, .5);
+    
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 18px, transparent 18px, transparent 33px, #d1ca00 33px), repeating-linear-gradient(90deg, #d1ca00, #d1ca00 18px, transparent 18px, transparent 33px, #d1ca00 33px), repeating-linear-gradient(180deg, transparent, transparent 18px, transparent 18px, transparent 33px, transparent 33px), repeating-linear-gradient(270deg, #d1ca00, #d1ca00 18px, transparent 18px, transparent 33px, #d1ca00 33px);
+    background-size: 3px calc(100% + 33px), calc(100% + 33px) 3px, 3px calc(100% + 33px) , calc(100% + 33px) 3px;
+    background-position: 0 0, 0 0, 100% 0, 0 100%;
+    background-repeat: no-repeat;
+    animation: borderAnimation 1s infinite linear;
+
+    padding: 30px;
+}
+
+@keyframes borderAnimation {
+    from { background-position: 0 0, -33px 0, 100% -33px, 0 100%; }
+    to { background-position: 0 -33px, 0 0, 100% 0, -33px 100%; }
 }
 
 .icon {

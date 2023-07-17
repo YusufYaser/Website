@@ -13,8 +13,6 @@ function App() {
             const circle = document.createElement("p")
             circle.className = "bgcircle"
             bg.current.appendChild(circle)
-            circle.style.left = "-100px"
-            circle.style.top = "-100px"
             
             setInterval(() => {
                 circle.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
@@ -108,12 +106,6 @@ function App() {
             <div className="section">
                 <center className="content">
                     unfinished, will be updated soon ;)
-                    <br/><br/>
-                    <strong>Libraries/Dependencies used:</strong> React and FontAwesome
-                    <br/>
-                    <strong>Font:</strong> Denk One
-                    <br/>
-                    Everything else was made by me
                     <br/><br/>
                     <strong>Copyright &copy; 2023 ~ Yusuf Yaser</strong>
                 </center>
