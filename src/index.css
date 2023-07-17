@@ -51,6 +51,7 @@ hr {
 
 .content {
     flex: 1;
+    z-index: 5;
 }
 
 .icon {
@@ -71,4 +72,33 @@ a {
     top: 0;
     left: 0;
     z-index: 0;
+}
+
+#background {
+    background-color: black;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+
+#bgblur {
+    z-index: 2;
+    backdrop-filter: blur(100px);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background-color: transparent;
+}
+
+.bgcircle {
+    border-radius: 100%;
+    transform: translate(0, 0, 0);
+    transition-duration: 3000ms;
+    position: fixed;
+    opacity: 0.8;
+    animation: linear 3000ms;
+    z-index: 1;
 }

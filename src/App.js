@@ -1,13 +1,40 @@
 import { faArrowDown, faQuestion } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Scroll from "react-scroll"
-import fiverrIcon from './assets/fiverr.svg'
 import githubIcon from './assets/github.svg'
 import twitterIcon from './assets/twitter.svg'
+import { useEffect, useRef } from "react";
 
 function App() {
+    const bg = useRef(null)
+
+    useEffect(() => {
+        // spawn circles
+        for (let i = 0; i < 5; i++) {
+            const circle = document.createElement("p")
+            circle.className = "bgcircle"
+            const size = Math.floor(Math.random() * 400) + 100
+            circle.style.width = `${size}px`
+            circle.style.height = `${size}px`
+            circle.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
+            bg.current.appendChild(circle)
+            circle.style.left = "-100px"
+            circle.style.top = "-100px"
+            
+            setInterval(() => {
+                circle.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
+
+                circle.style.left = `${Math.floor(Math.random() * bg.current.clientWidth * .95) - 100}px`
+                circle.style.top = `${Math.floor(Math.random() * bg.current.clientHeight * .95) - 100}px`
+            }, 2000)
+        }
+    }, [bg])
+
     return (
         <div>
+            <div id="background" ref={bg}></div>
+            <div id="bgblur"></div>
+
             <div className="section">
                 <center className="content">
                     <h1>Hey there, my name is Yusuf Yaser!</h1>
@@ -19,9 +46,7 @@ function App() {
                         }}
 
                         onClick={() => {
-                            Scroll.animateScroll.scrollTo(document.documentElement.clientHeight, {
-                                duration: 1500
-                            })
+                            Scroll.animateScroll.scrollTo(document.documentElement.clientHeight)
                         }}
                     >
                         <h2>
@@ -38,17 +63,6 @@ function App() {
                 <center className="content">
                     <h1>Some stuff I'm doing</h1>
                     
-                    <a
-                        href={"https://fiverr.com/yusufyaser"}
-                        target={"_blank"}
-                        rel={"noreferrer"}
-                    >
-                        <img
-                            src={fiverrIcon}
-                            className="icon"
-                            alt={"YusufYaser's Fiverr Page"}
-                        />
-                    </a>
                     <FontAwesomeIcon
                         className="icon"
                         style={{
