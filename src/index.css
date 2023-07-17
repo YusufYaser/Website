@@ -99,6 +99,6 @@ a {
     transition-duration: 3000ms;
     position: fixed;
     opacity: 0.8;
-    animation: linear 3000ms;
+    animation:cubic-bezier(0.25, 0.46, 0.45, 0.94) 2000ms;
     z-index: 1;
 }

@@ -1,4 +1,4 @@
-import { faArrowDown, faQuestion } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faQuestion, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Scroll from "react-scroll"
 import githubIcon from './assets/github.svg'
@@ -10,13 +10,9 @@ function App() {
 
     useEffect(() => {
         // spawn circles
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 30; i++) {
             const circle = document.createElement("p")
             circle.className = "bgcircle"
-            const size = Math.floor(Math.random() * 400) + 100
-            circle.style.width = `${size}px`
-            circle.style.height = `${size}px`
-            circle.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
             bg.current.appendChild(circle)
             circle.style.left = "-100px"
             circle.style.top = "-100px"
@@ -24,9 +20,13 @@ function App() {
             setInterval(() => {
                 circle.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
 
+                const size = Math.floor(Math.random() * 400) + 100
+                circle.style.width = `${size}px`
+                circle.style.height = `${size}px`
+
                 circle.style.left = `${Math.floor(Math.random() * bg.current.clientWidth * .95) - 100}px`
                 circle.style.top = `${Math.floor(Math.random() * bg.current.clientHeight * .95) - 100}px`
-            }, 2000)
+            }, Math.floor(Math.random() * 5000) + 1000)
         }
     }, [bg])
 
@@ -50,7 +50,7 @@ function App() {
                         }}
                     >
                         <h2>
-                            Go down to learn more
+                            Scroll down for more
                         </h2>
                         <div className="downarrow">
                             <FontAwesomeIcon icon={faArrowDown}/>
@@ -62,6 +62,8 @@ function App() {
             <div className="section">
                 <center className="content">
                     <h1>Some stuff I'm doing</h1>
+                    nothing (yet)
+                    <br/><br/>
                     
                     <FontAwesomeIcon
                         className="icon"
@@ -75,7 +77,7 @@ function App() {
 
             <div className="section">
                 <center className="content">
-                    <h1>Find me</h1>
+                    <h1>Find and contact me</h1>
 
                     <a
                         href={"https://github.com/YusufYaser"}
@@ -99,12 +101,22 @@ function App() {
                             alt={"YusufYaser's Twitter Page"}
                         />
                     </a>
+                    <a
+                        href={"mailto:me@yusufyaser.xyz"}
+                        target={"_blank"}
+                        rel={"noreferrer"}
+                    >
+                        <FontAwesomeIcon
+                            className="icon"
+                            icon={faEnvelope}
+                        />
+                    </a>
                 </center>
             </div>
 
             <div className="section">
                 <center className="content">
-                    unfinished, will be updated more soon ;)
+                    unfinished, will be updated soon ;)
                     <br/><br/>
                     <strong>Copyright &copy; 2023 ~ Yusuf Yaser</strong>
                 </center>
