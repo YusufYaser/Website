@@ -1,6 +1,5 @@
 import { faArrowDown, faQuestion, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Scroll from "react-scroll"
 import githubIcon from './assets/github.svg'
 import twitterIcon from './assets/twitter.svg'
 import { useEffect, useRef } from "react";
@@ -40,15 +39,7 @@ function App() {
                     <h1>Hey there, my name is Yusuf Yaser!</h1>
                     A Backend Developer and a System Administrator
                     <br/><br/>
-                    <span
-                        style={{
-                            cursor: 'pointer'
-                        }}
-
-                        onClick={() => {
-                            Scroll.animateScroll.scrollTo(document.documentElement.clientHeight)
-                        }}
-                    >
+                    <span>
                         <h2>
                             Scroll down for more
                         </h2>
@@ -117,6 +108,12 @@ function App() {
             <div className="section">
                 <center className="content">
                     unfinished, will be updated soon ;)
+                    <br/><br/>
+                    <strong>Libraries/Dependencies used:</strong> React and FontAwesome
+                    <br/>
+                    <strong>Font:</strong> Denk One
+                    <br/>
+                    Everything else was made by me
                     <br/><br/>
                     <strong>Copyright &copy; 2023 ~ Yusuf Yaser</strong>
                 </center>
