@@ -9,7 +9,7 @@ function App() {
 
     useEffect(() => {
         // spawn circles
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < ((bg.current.clientWidth * bg.current.clientHeight) / 35_000); i++) {
             const circle = document.createElement("p")
             circle.className = "bgcircle"
             bg.current.appendChild(circle)
@@ -17,9 +17,9 @@ function App() {
             setInterval(() => {
                 circle.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
 
-                const size = Math.floor(Math.random() * 400) + 100
-                circle.style.width = `${size}px`
-                circle.style.height = `${size}px`
+                const size = (Math.random() * (30 - 10)) + 10
+                circle.style.width = `${size}%`
+                circle.style.height = `${size}%`
 
                 circle.style.left = `${Math.floor(Math.random() * bg.current.clientWidth * .95) - 100}px`
                 circle.style.top = `${Math.floor(Math.random() * bg.current.clientHeight * .95) - 100}px`
