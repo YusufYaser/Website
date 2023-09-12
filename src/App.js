@@ -2,6 +2,7 @@ import { faArrowDown, faQuestion, faEnvelope } from "@fortawesome/free-solid-svg
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import githubIcon from './assets/github.svg'
 import twitterIcon from './assets/twitter.svg'
+import gameIcon from './assets/game.png'
 import { useEffect, useRef } from "react";
 
 function App() {
@@ -50,17 +51,19 @@ function App() {
 
             <div className="section">
                 <center className="content">
-                    <h1>Some stuff I'm doing</h1>
-                    nothing (yet)
-                    <br/><br/>
+                    <h1>A thing I'm doing</h1>
                     
-                    <FontAwesomeIcon
-                        className="icon"
-                        style={{
-                            filter: 'blur(16px)'
-                        }}
-                        icon={faQuestion}
-                    />
+                    <a
+                        href={"https://discord.gg/M7fJkaqwmk"}
+                        target={"_blank"}
+                        rel={"noreferrer"}
+                    >
+                        <img
+                            className="icon"
+                            src={gameIcon}
+                            alt={"???"}
+                        />  
+                    </a>
                 </center>
             </div>
 
