@@ -14,6 +14,7 @@ function App() {
             const circle = document.createElement("p")
             circle.className = "bgcircle"
             bg.current.appendChild(circle)
+            bg.current.style.backdropFilter = `blur(${bg.current.clientWidth / 13}px)`
             
             setInterval(() => {
                 circle.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
