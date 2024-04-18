@@ -49,7 +49,7 @@ function App() {
                 </center>
             </div>
 
-            <div className="section">
+            {/*<div className="section">
                 <center className="content">
                     <h1>A thing I'm doing</h1>
                     
@@ -65,7 +65,7 @@ function App() {
                         />  
                     </a>
                 </center>
-            </div>
+            </div>*/}
 
             <div className="section">
                 <center className="content">
