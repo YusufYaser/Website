@@ -10,7 +10,7 @@ function App() {
 
     useEffect(() => {
         // spawn circles
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < bg.current.clientWidth * 45; i++) {
             const circle = document.createElement("p")
             circle.className = "bgcircle"
             bg.current.appendChild(circle)
