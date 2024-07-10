@@ -1,8 +1,7 @@
-import { faArrowDown, faQuestion, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import githubIcon from './assets/github.svg'
 import twitterIcon from './assets/twitter.svg'
-import gameIcon from './assets/game.png'
 import { useEffect, useRef } from "react";
 
 function App() {
@@ -10,7 +9,7 @@ function App() {
 
     useEffect(() => {
         // spawn circles
-        for (let i = 0; i < bg.current.clientWidth / 45; i++) {
+        for (let i = 0; i < 30; i++) {
             const circle = document.createElement("p")
             circle.className = "bgcircle"
             bg.current.appendChild(circle)
@@ -23,8 +22,8 @@ function App() {
                 circle.style.width = `${size}%`
                 circle.style.height = `${size}%`
 
-                circle.style.left = `${Math.floor(Math.random() * bg.current.clientWidth * .95) - 100}px`
-                circle.style.top = `${Math.floor(Math.random() * bg.current.clientHeight * .95) - 100}px`
+                circle.style.left = `${Math.random() * .95 * 100}%`
+                circle.style.top = `${Math.random() * .95 * 100}%`
             }, Math.floor(Math.random() * 5000) + 1000)
         }
     }, [bg])
