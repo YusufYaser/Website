@@ -10,10 +10,11 @@ function App() {
 
     useEffect(() => {
         // spawn circles
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < bg.current.clientWidth / 45; i++) {
             const circle = document.createElement("p")
             circle.className = "bgcircle"
             bg.current.appendChild(circle)
+            bg.current.style.backdropFilter = `blur(${bg.current.clientWidth / 13}px)`
             
             setInterval(() => {
                 circle.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
@@ -49,7 +50,7 @@ function App() {
                 </center>
             </div>
 
-            <div className="section">
+            {/*<div className="section">
                 <center className="content">
                     <h1>A thing I'm doing</h1>
                     
@@ -65,7 +66,7 @@ function App() {
                         />  
                     </a>
                 </center>
-            </div>
+            </div>*/}
 
             <div className="section">
                 <center className="content">
