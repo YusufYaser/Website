@@ -6,19 +6,24 @@ type Text = {
 }
 
 type TextAnimationProps = {
-  parts: Text[]
+  parts: Text[],
+  cursorVisible?: "always" | "typing" | "never"
 }
 
-export default function TextAnimation({ parts }: TextAnimationProps) {
+export default function TextAnimation({ parts, cursorVisible }: TextAnimationProps) {
   const textRef = useRef<HTMLSpanElement[]>([])
+  const typingRef = useRef<HTMLSpanElement>(null)
+
   
   useEffect(() => {
+    if (!cursorVisible || cursorVisible == "never") typingRef.current!.style.display = "none"
     let interval: NodeJS.Timeout | null = null
     const currentParts: string[] = []
     interval = setInterval(() => {
       for (let i = 0; i <= parts.length; i++) {
         if (i == parts.length) { // nothing else to do
           clearInterval(interval as NodeJS.Timeout)
+          if (cursorVisible == "typing") typingRef.current!.style.display = "none"
           break
         }
 
@@ -38,6 +43,7 @@ export default function TextAnimation({ parts }: TextAnimationProps) {
       {parts.map((text, i) => (
         <span key={i} ref={el => textRef.current[i] = el!} className={text.className}/>
       ))}
+      <span ref={typingRef} className="pr-0.5 opacity-50 pulse">&#x200B;</span>
     </>
   )
 }

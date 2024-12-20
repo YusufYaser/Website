@@ -15,8 +15,8 @@ export default function App() {
               { text: "Yusuf Kelany", className: "text-red-600" },
               { text: "!", className: "" }
             ]}
+            cursorVisible="always"
           />
-          <span className="pr-0.5 opacity-50 pulse">&#x200B;</span>
         </h1>
         <p>
           A Software Developer and System Administrator
@@ -45,9 +45,16 @@ export default function App() {
       </div>
 
 
-      {/* bottom spacing */}
-
-      <div className="h-24"></div>
+      <div>
+        <p className="pb-5 text-center">
+          <TextAnimation
+            parts={[
+              { text: `Copyright \u00a9 ${(new Date()).getFullYear()} Yusuf Kelany`, className: "" }
+            ]}
+            cursorVisible="typing"
+          />
+        </p>
+      </div>
     </div>
   )
 }
