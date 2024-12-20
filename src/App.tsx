@@ -1,14 +1,47 @@
+import { useEffect, useRef } from 'react';
 import './App.css';
 import Background from "./components/Background";
 
+type Title = {
+  text: string[]
+}
+
 export default function App() {
+  const title: Title = {
+    text: ["Hey there, I'm ", "Yusuf Kelany", "!"]
+  }
+
+  const textRef = [useRef<HTMLSpanElement>(null), useRef<HTMLSpanElement>(null), useRef<HTMLSpanElement>(null)]
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null
+    const currentTitle: Title = {
+      text: ["", "", ""]
+    }
+    interval = setInterval(() => {
+      for (let i = 0; i < 4; i++) {
+        if (i == 3) {
+          clearInterval(interval as NodeJS.Timeout)
+          break
+        }
+
+        if (currentTitle.text[i].length == title.text[i].length) continue
+
+        currentTitle.text[i] += title.text[i][currentTitle.text[i].length]
+        textRef[i].current!.innerText = currentTitle.text[i]
+        break
+      }
+    }, 100);
+  });
+
   return (
     <div className="flex flex-col flex-wrap space-y-24 text-white content-center">
       <Background/>
 
       <div>
         <h1 className="text-2xl font-bold">
-          Hey there, I'm <span className="text-red-600">Yusuf Kelany</span>!
+          &#x200B;<span ref={textRef[0]}/><span className="text-red-600" ref={textRef[1]} /><span ref={textRef[2]} />
+          <span className="pr-0.5 opacity-50 pulse"></span>
         </h1>
         <p>
           A Software Developer and System Administrator
