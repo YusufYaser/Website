@@ -41,7 +41,7 @@ export default function App() {
       <div>
         <h1 className="text-2xl font-bold">
           &#x200B;<span ref={textRef[0]}/><span className="text-red-600" ref={textRef[1]} /><span ref={textRef[2]} />
-          <span className="pr-0.5 opacity-50 pulse"></span>
+          <span className="pr-0.5 opacity-50 pulse">&#x200B;</span>
         </h1>
         <p>
           A Software Developer and System Administrator
