@@ -44,9 +44,13 @@ export default function App() {
         </div>
       </div>
 
-
       <div>
         <p className="pb-5 text-center">
+          <a href="https://github.com/YusufYaser/Website" target="_blank" rel="noreferrer"
+            className="text-blue-400 hover:text-blue-500">
+            Go to the GitHub Repository
+          </a>
+          <br/>
           <TextAnimation
             parts={[
               { text: `Copyright \u00a9 ${(new Date()).getFullYear()} Yusuf Kelany`, className: "" }
