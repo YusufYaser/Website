@@ -5,6 +5,10 @@
   user-select: none;
 }
 
+img {
+  -webkit-user-drag: none;
+}
+
 .particles-background {
   position: absolute;
   z-index: -100;
