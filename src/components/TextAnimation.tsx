@@ -19,6 +19,11 @@ export default function TextAnimation({ parts, cursorVisible }: TextAnimationPro
     if (!cursorVisible || cursorVisible == "never") typingRef.current!.style.display = "none"
     let interval: NodeJS.Timeout | null = null
     const currentParts: string[] = []
+    
+    for (let i = 0; i <= parts.length; i++) {
+      if (textRef.current[i]) textRef.current[i].innerText = ""
+    }
+
     interval = setInterval(() => {
       for (let i = 0; i <= parts.length; i++) {
         if (i == parts.length) { // nothing else to do

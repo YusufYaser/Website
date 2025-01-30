@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router';
+import { AnimatePresence, motion } from 'framer-motion';
+import { BrowserRouter, Route, Routes, useLocation, useNavigate } from 'react-router';
 import './App.css';
 import Blog from './Blog';
 import BlogPost from './BlogPost';
@@ -19,6 +20,34 @@ function NavbarButton(props: NavbarButtonProps) {
   )
 }
 
+const pageVariants = {
+  initial: { opacity: 0, y: 10 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.2 } },
+  exit: { opacity: 0, y: -10, transition: { duration: 0.2 } }
+};
+
+const AppRoutes = () => {
+  const location = useLocation()
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={pageVariants}
+      >
+        <Routes location={location} key={location.pathname}>
+          <Route index element={<Home />}/>
+          <Route path={"blog"} element={<Blog />}/>
+          <Route path={"blog/*"} element={<BlogPost />}/>
+        </Routes>
+      </motion.div>
+    </AnimatePresence>
+  )
+}
+
 export default function App() {
   return (
     <>
@@ -29,11 +58,7 @@ export default function App() {
           <NavbarButton text={"Blog"} href={"/blog"} />
         </div>
 
-        <Routes>
-          <Route index element={<Home />}/>
-          <Route path={"blog"} element={<Blog />}/>
-          <Route path={"blog/*"} element={<BlogPost />}/>
-        </Routes>
+        <AppRoutes/>
       </BrowserRouter>
     </>
   )
