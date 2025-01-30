@@ -50,6 +50,12 @@
   padding-left: 1rem;
 }
 
+.md code {
+  background-color: rgb(40, 44, 52);
+  padding: 2px;
+  border-radius: 2px;
+}
+
 .md a {
   text-decoration: underline;
   color: lightblue;

@@ -4,22 +4,33 @@ import { useLocation } from "react-router";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
-import { getPostContent, getPostMeta } from "./Blog";
+import { getPostContent, getPostMeta, PostMeta } from "./Blog";
 import './Blog.css';
+const files = import.meta.glob("/src/posts/*", { query: '?raw', import: 'default',  });
 
 export default function BlogPost() {
   const loc = useLocation();
-  const id = loc.pathname.split("/").pop()?.split(".")[0] ?? "invalid"
+  const postId = loc.pathname.split("/").pop()?.split(".")[0] ?? "invalid"
   const [content, setContent] = useState("# Loading");
+  const [loaded, setLoaded] = useState(false);
+  const [meta, setMeta] = useState<PostMeta>({});
 
   useEffect(() => {
     const loadPost = async () => {
       try {
-        const importer = () => import(`/src/posts/${id}.md?t=${Date.now()}import&raw`).then(m => m["default"])
-        const rawContent = await importer()
+        await Promise.all(
+          Object.entries(files).map(async ([path, importer]) => {
+            const id = path.split("/").pop()?.split(".")[0] ?? "invalid"
+            if (id != postId) return
+            // @ts-expect-error: importer() should always return a string
+            const rawContent: string = await importer()
 
-        setContent(getPostContent(rawContent))
-        document.title = getPostMeta(rawContent).title
+            setContent(getPostContent(rawContent))
+            setMeta(getPostMeta(rawContent))
+            setLoaded(true)
+            document.title = getPostMeta(rawContent).title
+          })
+        )
       } catch (e) {
         console.error(e)
         document.title = "Not Found";
@@ -28,12 +39,12 @@ export default function BlogPost() {
     }
     
     loadPost()
-  }, [id, loc])
+  }, [postId, loc])
 
   return (
     <div>
       <Markdown
-        className="md lg:w-1/2 lg:p-0 p-8 center w-full ml-auto mr-auto"
+        className="md lg:w-1/2 lg:p-0 p-8 mb-8 center w-full ml-auto mr-auto"
         remarkPlugins={[remarkGfm]}
           components={{
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -54,6 +65,10 @@ export default function BlogPost() {
       >
         {content}
       </Markdown>
+
+      <div className="md lg:w-1/2 lg:p-0 p-8 center w-full ml-auto mr-auto text-gray-400">
+        {loaded && <i>Published on: {meta.date}</i>}
+      </div>
     </div>
   )
 }
