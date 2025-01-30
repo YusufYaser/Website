@@ -4,6 +4,7 @@ import './App.css';
 import Blog from './Blog';
 import BlogPost from './BlogPost';
 import Home from './Home';
+import Background from './components/Background';
 
 interface NavbarButtonProps {
   text: string;
@@ -14,7 +15,7 @@ function NavbarButton(props: NavbarButtonProps) {
   const nav = useNavigate();
 
   return (
-    <button className="text-white hover:underline text-xl lg:p-8 p-2" onClick={() => nav(props.href)}>
+    <button className="text-white hover:underline text-xl lg:p-4 p-2" onClick={() => nav(props.href)}>
       {props.text}
     </button>
   )
@@ -41,7 +42,7 @@ const AppRoutes = () => {
         <Routes location={location} key={location.pathname}>
           <Route index element={<Home />}/>
           <Route path={"blog"} element={<Blog />}/>
-          <Route path={"blog/*"} element={<BlogPost />}/>
+          <Route path={"blog/:postId"} element={<BlogPost />}/>
         </Routes>
       </motion.div>
     </AnimatePresence>
@@ -49,11 +50,18 @@ const AppRoutes = () => {
 }
 
 export default function App() {
+  setInterval(() => {
+    const canvas: HTMLCanvasElement | null = document.querySelector("#tsparticles > canvas")
+    if (canvas) canvas.style.opacity = window.location.pathname == '/' ? '1.0' : '0.5'
+  }, 500)
+
   return (
     <>
       <BrowserRouter>
-        <div className="flex flex-row flex-wrap lg:space-x-16 text-white justify-center">
-          <span className={"text-red-600 text-xl p-8 pr-16 font-extrabold"}>Yusuf Kelany</span>
+        <Background/>
+
+        <div className="flex flex-row flex-wrap lg:space-x-16 text-white justify-center backdrop-blur-sm mb-4">
+          <span className={"text-red-600 text-xl p-4 pr-16 font-extrabold"}>Yusuf Kelany</span>
           <NavbarButton text={"Home"} href={"/"} />
           <NavbarButton text={"Blog"} href={"/blog"} />
         </div>

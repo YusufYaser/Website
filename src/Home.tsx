@@ -1,4 +1,3 @@
-import Background from "./components/Background";
 import TextAnimation from './components/TextAnimation';
 
 export default function Home() {
@@ -6,8 +5,6 @@ export default function Home() {
 
   return (
     <div className="flex flex-col flex-wrap space-y-24 text-white content-center">
-      <Background/>
-
       <div>
         <h1 className="text-2xl font-bold">
           <TextAnimation

@@ -113,7 +113,7 @@ export default function Blog() {
                 </h1>
                 <span className="text-gray-400 text-sm">{meta.date}</span>
                 <Markdown className="text-gray-300">
-                  {content.slice(lines[0].length, lines[0].length + 150) + ((content.length - lines[0].length) > 150 ? "..." : "")}
+                  {content.slice(lines[0].length, lines[0].length + 135) + ((content.length - lines[0].length) > 135 ? "..." : "")}
                 </Markdown>
               </Link>
             </div>

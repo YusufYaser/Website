@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
@@ -10,32 +10,26 @@ const files = import.meta.glob("/src/posts/*", { query: '?raw', import: 'default
 
 export default function BlogPost() {
   const loc = useLocation();
-  const postId = loc.pathname.split("/").pop()?.split(".")[0] ?? "invalid"
+  const { postId } = useParams()
   const [content, setContent] = useState("# Loading");
   const [loaded, setLoaded] = useState(false);
   const [meta, setMeta] = useState<PostMeta>({});
 
   useEffect(() => {
     const loadPost = async () => {
-      try {
-        await Promise.all(
-          Object.entries(files).map(async ([path, importer]) => {
-            const id = path.split("/").pop()?.split(".")[0] ?? "invalid"
-            if (id != postId) return
-            // @ts-expect-error: importer() should always return a string
-            const rawContent: string = await importer()
+      await Promise.all(
+        Object.entries(files).map(async ([path, importer]) => {
+          const id = path.split("/").pop()?.split(".")[0] ?? "invalid"
+          if (id != postId) return
+          // @ts-expect-error: importer() should always return a string
+          const rawContent: string = await importer()
 
-            setContent(getPostContent(rawContent))
-            setMeta(getPostMeta(rawContent))
-            setLoaded(true)
-            document.title = getPostMeta(rawContent).title
-          })
-        )
-      } catch (e) {
-        console.error(e)
-        document.title = "Not Found";
-        setContent("Not Found")
-      }
+          setContent(getPostContent(rawContent))
+          setMeta(getPostMeta(rawContent))
+          setLoaded(true)
+          document.title = getPostMeta(rawContent).title
+        })
+      )
     }
     
     loadPost()
