@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react"
 
 type Text = {
   text: string,
-  className: string
+  className?: string
 }
 
 type TextAnimationProps = {
@@ -29,6 +29,11 @@ export default function TextAnimation({ parts, cursorVisible }: TextAnimationPro
 
         if (!currentParts[i]) currentParts[i] = ""
         if (currentParts[i].length == parts[i].text.length) continue // already finished this part
+
+        if (!textRef.current[i]) {
+          clearInterval(interval as NodeJS.Timeout)
+          break
+        }
 
         currentParts[i] += parts[i].text[currentParts[i].length]
         textRef.current[i].innerText = currentParts[i]
