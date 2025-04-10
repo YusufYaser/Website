@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
 
+@font-face {
+  font-family: "SuperComic";
+  src: url("assets/SuperComic.ttf") format("truetype");
+}
+
 :root {
   font-family: "Nunito", sans-serif;
   user-select: none;
@@ -14,6 +19,7 @@ img {
 .particles-background {
   position: absolute;
   z-index: -100;
+  opacity: 0.5;
 }
 
 @keyframes pulse {
@@ -30,4 +36,27 @@ img {
 
 .pulse {
   animation: pulse 1s infinite;
+}
+
+.yusuf {
+  -webkit-text-stroke: 4px #ffffff5d;
+  font-size: 60px;
+  background: radial-gradient(circle, rgb(231, 0, 0), rgb(0, 0, 231));
+  background-size: 800% 800%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: yusufAnimation 8s ease infinite;
+}
+
+@keyframes yusufAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

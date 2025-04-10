@@ -50,11 +50,6 @@ const AppRoutes = () => {
 }
 
 export default function App() {
-  setInterval(() => {
-    const canvas: HTMLCanvasElement | null = document.querySelector("#tsparticles > canvas")
-    if (canvas) canvas.style.opacity = window.location.pathname == '/' ? '1.0' : '0.5'
-  }, 500)
-
   return (
     <>
       <BrowserRouter>

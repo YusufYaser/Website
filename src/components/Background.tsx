@@ -17,10 +17,6 @@ export default function Background() {
     <>
       {init && <Particles
         className="particles-background"
-        style={{
-          zIndex: -100,
-          position: "absolute",
-        }}
         options={{
           background: {
             color: {
@@ -30,7 +26,7 @@ export default function Background() {
           fpsLimit: 120,
           particles: {
             color: {
-              value: "#ffffff",
+              value: "#ffffff"
             },
             links: {
               color: "#ffffff",
